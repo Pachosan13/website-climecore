@@ -124,13 +124,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 clamp(20px, 4vw, 60px);
+  gap: 40px;
 }
 .nav-logo {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 .nav-logo-img {
-  height: 28px;
+  height: 26px;
   width: auto;
   display: block;
   transition: opacity 0.3s ease;
