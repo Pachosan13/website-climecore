@@ -885,16 +885,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   align-items: center;
   animation: marquee 25s linear infinite;
 }
-.brands-track img {
-  height: 36px;
-  opacity: 0.35;
+.brands-track img,
+.brands-track svg {
+  height: 40px;
+  opacity: 0.4;
   filter: grayscale(100%);
-  transition: all 0.4s ease;
+  transition: all 0.5s ease;
   flex-shrink: 0;
 }
-.brands-track img:hover {
-  opacity: 0.8;
+.brands-track img:hover,
+.brands-track svg:hover {
+  opacity: 1;
   filter: grayscale(0%);
+  transform: scale(1.08);
 }
 @keyframes marquee {
   0% { transform: translateX(0); }
