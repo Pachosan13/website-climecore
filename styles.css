@@ -871,19 +871,25 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 /* ═══════════════════════════════════════════════════════════
-   BRANDS / PARTNERS
+   CLIENTS / BRANDS SECTION
    ═══════════════════════════════════════════════════════════ */
+.clients-section {
+  padding-top: clamp(60px, 8vw, 100px);
+  background: var(--surface);
+}
+.clients-header {
+  text-align: center;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
 .brands-bar {
-  padding: 60px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  padding: 48px 0 clamp(60px, 8vw, 100px);
   overflow: hidden;
 }
 .brands-track {
   display: flex;
   gap: 80px;
   align-items: center;
-  animation: marquee 25s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 .brands-track img,
 .brands-track svg {
