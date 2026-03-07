@@ -325,7 +325,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .hero-subtitle {
   font-size: clamp(1.05rem, 1.8vw, 1.3rem);
-  color: var(--text-on-dark);
+  color: var(--text-light);
   line-height: 1.7;
   max-width: 560px;
   margin-bottom: 40px;
@@ -1171,7 +1171,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .page-header {
   position: relative;
   padding: 180px 0 100px;
-  background: var(--navy);
+  background: var(--white);
   overflow: hidden;
 }
 .page-header-bg {
@@ -1486,4 +1486,321 @@ button:focus-visible {
 /* Smooth page transitions */
 html {
   scroll-padding-top: 80px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VRV EXPLOSIVE PRODUCT REVEAL
+   Apple-style scroll-driven animation section
+   ═══════════════════════════════════════════════════════════ */
+.vrv-section {
+  position: relative;
+  background: var(--navy);
+  overflow: hidden;
+}
+.vrv-pin {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 80px;
+  position: relative;
+}
+.vrv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* ── Text Column ── */
+.vrv-text-col {
+  color: var(--text);
+}
+.vrv-desc {
+  font-size: 1.1rem;
+  color: var(--text-on-dark);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-top: 12px;
+  max-width: 480px;
+}
+
+/* Specs Grid */
+.vrv-specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 40px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.vrv-spec-card {
+  background: rgba(0, 194, 255, 0.05);
+  border: 1px solid rgba(0, 194, 255, 0.12);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: all 0.4s var(--transition);
+}
+.vrv-spec-card:hover {
+  background: rgba(0, 194, 255, 0.1);
+  border-color: rgba(0, 194, 255, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 194, 255, 0.1);
+}
+.vrv-spec-val {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--ice);
+  line-height: 1;
+}
+.vrv-spec-val small {
+  font-size: 0.5em;
+  font-weight: 400;
+  opacity: 0.65;
+}
+.vrv-spec-lbl {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-light);
+  margin-top: 8px;
+}
+
+/* Features List */
+.vrv-feat-list {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.vrv-feat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 18px;
+  background: rgba(11, 20, 38, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(11, 20, 38, 0.06);
+  transition: all 0.35s ease;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.vrv-feat-item:hover {
+  background: rgba(0, 194, 255, 0.06);
+  border-color: rgba(0, 194, 255, 0.15);
+  transform: translateX(6px);
+}
+.vrv-feat-item strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.vrv-feat-item div:last-child {
+  color: var(--text-light);
+  font-weight: 300;
+}
+.vrv-feat-dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  background: var(--ice);
+  border-radius: 50%;
+  margin-top: 7px;
+  box-shadow: 0 0 10px rgba(0, 194, 255, 0.5);
+}
+
+/* ── Visual Column ── */
+.vrv-visual-col {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.vrv-product {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  aspect-ratio: 1 / 1;
+}
+.vrv-img-assembled,
+.vrv-img-exploded {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.vrv-img-exploded {
+  opacity: 0;
+  transform: scale(1.03);
+}
+
+/* Glow ring behind product */
+.vrv-glow-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(0, 194, 255, 0.12) 0%, rgba(0, 194, 255, 0.03) 50%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.5;
+  filter: blur(40px);
+  z-index: 0;
+}
+
+/* Scan line effect */
+.vrv-scanline {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 194, 255, 0.8) 30%, var(--ice) 50%, rgba(0, 194, 255, 0.8) 70%, transparent 100%);
+  box-shadow:
+    0 0 20px rgba(0, 194, 255, 0.6),
+    0 0 60px rgba(0, 194, 255, 0.2),
+    0 -8px 30px rgba(0, 194, 255, 0.1),
+    0 8px 30px rgba(0, 194, 255, 0.1);
+  opacity: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Flash overlay for explosion transition */
+.vrv-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 194, 255, 0.4) 0%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* ── Component Labels ── */
+.vrv-lbl {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 6;
+  transform: translateY(10px);
+}
+.vrv-lbl-pip {
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+  background: var(--ice);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(0, 194, 255, 0.7), 0 0 24px rgba(0, 194, 255, 0.3);
+  position: relative;
+}
+.vrv-lbl-pip::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(0, 194, 255, 0.3);
+  border-radius: 50%;
+  animation: vrv-pip-pulse 2s ease-in-out infinite;
+}
+@keyframes vrv-pip-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.8); opacity: 0; }
+}
+.vrv-lbl-tag {
+  font-size: 0.68rem;
+  color: var(--ice);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  white-space: nowrap;
+  background: rgba(11, 20, 38, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 194, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Label positions — tuned for the exploded view layout */
+.vrv-lbl-1 { top: 55%; right: 2%; }        /* Compresores — center-right */
+.vrv-lbl-2 { top: 25%; left: 2%; }          /* PCB — upper-left */
+.vrv-lbl-3 { top: 32%; right: 0%; }         /* Intercambiador — upper-right */
+.vrv-lbl-4 { top: 72%; left: 5%; }          /* Ventiladores — lower-left */
+
+/* ── Scroll Cue ── */
+.vrv-scroll-cue {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: rgba(11, 20, 38, 0.25);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  z-index: 10;
+}
+.vrv-cue-line {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, transparent, var(--ice));
+  animation: vrv-scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes vrv-scroll-pulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.15); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .vrv-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .vrv-visual-col {
+    order: -1;
+  }
+  .vrv-product {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .vrv-lbl {
+    display: none; /* Labels don't work well on mobile without precise positioning */
+  }
+  .vrv-specs-grid,
+  .vrv-feat-list {
+    opacity: 1;
+    transform: none;
+  }
+  .vrv-pin {
+    padding: 100px 0 60px;
+    min-height: auto;
+  }
+}
+@media (max-width: 600px) {
+  .vrv-specs-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .vrv-spec-card {
+    padding: 18px 14px;
+  }
+  .vrv-spec-val {
+    font-size: 1.6rem;
+  }
+  .vrv-product {
+    max-width: 350px;
+  }
 }

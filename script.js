@@ -139,4 +139,113 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ═══════════════════════════════════════════════════════════
+  // VRV EXPLOSIVE PRODUCT REVEAL — GSAP ScrollTrigger Animation
+  // Apple-style pinned scroll with crossfade + labels + scan
+  // ═══════════════════════════════════════════════════════════
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const vrvSection = document.querySelector('.vrv-section');
+    if (vrvSection) {
+
+      // Main pinned timeline
+      const vrvTL = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.vrv-section',
+          start: 'top top',
+          end: '+=250%',
+          pin: '.vrv-pin',
+          scrub: 1.2,
+          anticipatePin: 1,
+        }
+      });
+
+      // Phase 1: Flash + Scanline sweep (0 → 0.25)
+      vrvTL
+        .to('.vrv-scanline', {
+          top: '100%',
+          opacity: 1,
+          duration: 1.2,
+          ease: 'none'
+        }, 0)
+        .to('.vrv-flash', {
+          opacity: 1,
+          duration: 0.4,
+          ease: 'power2.in'
+        }, 0.5)
+        .to('.vrv-flash', {
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.out'
+        }, 0.9)
+
+      // Phase 2: Assembled → Exploded crossfade (0.5 → 1.5)
+        .to('.vrv-img-assembled', {
+          opacity: 0,
+          scale: 1.08,
+          filter: 'blur(6px)',
+          duration: 1,
+          ease: 'power2.inOut'
+        }, 0.6)
+        .to('.vrv-img-exploded', {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          ease: 'power2.inOut'
+        }, 0.7)
+
+      // Phase 3: Glow ring intensifies
+        .to('.vrv-glow-ring', {
+          opacity: 1,
+          scale: 1.15,
+          duration: 1,
+          ease: 'power2.out'
+        }, 0.8)
+
+      // Phase 4: Specs animate in (1.5 → 2.0)
+        .to('.vrv-specs-grid', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out'
+        }, 1.5)
+
+      // Phase 5: Labels fly in with stagger (2.0 → 2.8)
+        .to('.vrv-lbl', {
+          opacity: 1,
+          y: 0,
+          stagger: 0.15,
+          duration: 0.5,
+          ease: 'back.out(1.4)'
+        }, 2.0)
+
+      // Phase 6: Features list slides in (2.5 → 3.2)
+        .to('.vrv-feat-list', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out'
+        }, 2.5)
+
+      // Phase 7: Hold for reading (3.2 → 4.0)
+        .to({}, { duration: 1 });
+
+      // Hide scroll cue when animation starts
+      ScrollTrigger.create({
+        trigger: '.vrv-section',
+        start: 'top top',
+        onEnter: () => gsap.to('.vrv-scroll-cue', { opacity: 0, duration: 0.4 }),
+        onLeaveBack: () => gsap.to('.vrv-scroll-cue', { opacity: 1, duration: 0.4 })
+      });
+
+      // Reset scanline after it completes
+      ScrollTrigger.create({
+        trigger: '.vrv-section',
+        start: 'top+=80% top',
+        onEnter: () => gsap.set('.vrv-scanline', { opacity: 0 }),
+      });
+    }
+  }
+
 });
