@@ -1494,8 +1494,8 @@ html {
    ═══════════════════════════════════════════════════════════ */
 .vrv-section {
   position: relative;
-  background: var(--navy);
-  overflow: hidden;
+  background: var(--white);
+  overflow: visible;
 }
 .vrv-pin {
   min-height: 100vh;
@@ -1517,7 +1517,7 @@ html {
 }
 .vrv-desc {
   font-size: 1.1rem;
-  color: var(--text-on-dark);
+  color: var(--text-light);
   line-height: 1.7;
   font-weight: 300;
   margin-top: 12px;
@@ -1763,6 +1763,16 @@ html {
   50% { opacity: 1; transform: scaleY(1.15); }
 }
 
+
+/* Shard explosion pieces */
+.vrv-shard {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.vrv-spark {
+  will-change: transform, opacity;
+}
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .vrv-grid {
