@@ -1489,20 +1489,12 @@ html {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   VRV EXPLOSIVE PRODUCT REVEAL
-   Apple-style scroll-driven animation section
+   VRV PRODUCT SHOWCASE — Video-ready section
    ═══════════════════════════════════════════════════════════ */
 .vrv-section {
   position: relative;
   background: var(--white);
-  overflow: visible;
-}
-.vrv-pin {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 120px 0 80px;
-  position: relative;
+  padding: 100px 0 80px;
 }
 .vrv-grid {
   display: grid;
@@ -1530,8 +1522,6 @@ html {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-top: 40px;
-  opacity: 0;
-  transform: translateY(30px);
 }
 .vrv-spec-card {
   background: rgba(0, 194, 255, 0.05);
@@ -1573,8 +1563,6 @@ html {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  opacity: 0;
-  transform: translateY(30px);
 }
 .vrv-feat-item {
   display: flex;
@@ -1611,168 +1599,29 @@ html {
   box-shadow: 0 0 10px rgba(0, 194, 255, 0.5);
 }
 
-/* ── Visual Column ── */
+/* ── Visual Column — Video / Poster ── */
 .vrv-visual-col {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.vrv-product {
+.vrv-video-wrap {
   position: relative;
   width: 100%;
   max-width: 650px;
-  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(11, 20, 38, 0.08), 0 4px 16px rgba(0, 194, 255, 0.06);
 }
-.vrv-img-assembled,
-.vrv-img-exploded {
-  position: absolute;
-  inset: 0;
+.vrv-video-wrap video,
+.vrv-poster-img {
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
-  object-position: center;
-}
-.vrv-img-exploded {
-  opacity: 0;
-  transform: scale(1.03);
 }
 
-/* Glow ring behind product */
-.vrv-glow-ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  height: 70%;
-  background: radial-gradient(circle, rgba(0, 194, 255, 0.12) 0%, rgba(0, 194, 255, 0.03) 50%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0.5;
-  filter: blur(40px);
-  z-index: 0;
-}
-
-/* Scan line effect */
-.vrv-scanline {
-  position: absolute;
-  left: 5%;
-  right: 5%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, rgba(0, 194, 255, 0.8) 30%, var(--ice) 50%, rgba(0, 194, 255, 0.8) 70%, transparent 100%);
-  box-shadow:
-    0 0 20px rgba(0, 194, 255, 0.6),
-    0 0 60px rgba(0, 194, 255, 0.2),
-    0 -8px 30px rgba(0, 194, 255, 0.1),
-    0 8px 30px rgba(0, 194, 255, 0.1);
-  opacity: 0;
-  top: 0;
-  pointer-events: none;
-  z-index: 5;
-}
-
-/* Flash overlay for explosion transition */
-.vrv-flash {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(0, 194, 255, 0.4) 0%, transparent 70%);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 4;
-}
-
-/* ── Component Labels ── */
-.vrv-lbl {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 6;
-  transform: translateY(10px);
-}
-.vrv-lbl-pip {
-  width: 10px;
-  height: 10px;
-  min-width: 10px;
-  background: var(--ice);
-  border-radius: 50%;
-  box-shadow: 0 0 12px rgba(0, 194, 255, 0.7), 0 0 24px rgba(0, 194, 255, 0.3);
-  position: relative;
-}
-.vrv-lbl-pip::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border: 1px solid rgba(0, 194, 255, 0.3);
-  border-radius: 50%;
-  animation: vrv-pip-pulse 2s ease-in-out infinite;
-}
-@keyframes vrv-pip-pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.8); opacity: 0; }
-}
-.vrv-lbl-tag {
-  font-size: 0.68rem;
-  color: var(--ice);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
-  white-space: nowrap;
-  background: rgba(11, 20, 38, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 6px 14px;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 194, 255, 0.2);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Label positions — tuned for the exploded view layout */
-.vrv-lbl-1 { top: 55%; right: 2%; }        /* Compresores — center-right */
-.vrv-lbl-2 { top: 25%; left: 2%; }          /* PCB — upper-left */
-.vrv-lbl-3 { top: 32%; right: 0%; }         /* Intercambiador — upper-right */
-.vrv-lbl-4 { top: 72%; left: 5%; }          /* Ventiladores — lower-left */
-
-/* ── Scroll Cue ── */
-.vrv-scroll-cue {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  color: rgba(11, 20, 38, 0.25);
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  z-index: 10;
-}
-.vrv-cue-line {
-  width: 1px;
-  height: 44px;
-  background: linear-gradient(to bottom, transparent, var(--ice));
-  animation: vrv-scroll-pulse 2s ease-in-out infinite;
-}
-@keyframes vrv-scroll-pulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(1); }
-  50% { opacity: 1; transform: scaleY(1.15); }
-}
-
-
-/* Shard explosion pieces */
-.vrv-shard {
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-.vrv-spark {
-  will-change: transform, opacity;
-}
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .vrv-grid {
@@ -1782,21 +1631,12 @@ html {
   .vrv-visual-col {
     order: -1;
   }
-  .vrv-product {
+  .vrv-video-wrap {
     max-width: 500px;
     margin: 0 auto;
   }
-  .vrv-lbl {
-    display: none; /* Labels don't work well on mobile without precise positioning */
-  }
-  .vrv-specs-grid,
-  .vrv-feat-list {
-    opacity: 1;
-    transform: none;
-  }
-  .vrv-pin {
-    padding: 100px 0 60px;
-    min-height: auto;
+  .vrv-section {
+    padding: 80px 0 60px;
   }
 }
 @media (max-width: 600px) {
@@ -1810,7 +1650,7 @@ html {
   .vrv-spec-val {
     font-size: 1.6rem;
   }
-  .vrv-product {
+  .vrv-video-wrap {
     max-width: 350px;
   }
 }
